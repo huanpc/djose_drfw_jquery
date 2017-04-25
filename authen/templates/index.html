@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}{% endblock %}
+        {% load staticfiles %}
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static 'authen.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jquery.validate.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+
+<body>
+    <div class="content">
+        <div class="container">            
+            <div class="row" style="display: none;" id="login-panel">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <a href="#" class="active" id="login-form-link">Login</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="#" id="register-form-link">Register</a>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">                                
+                                    <form id="login-form" action="" method="post" style="display: block;">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" minlength="2">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" minlength="5">
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                            <label for="remember"> Remember Me</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn-login" value="Log In">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="text-center">
+                                                        <a href="" tabindex="5" id="forgot-password-action" class="forgot-password">Forgot Password?</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form id="register-form" action="" method="post" style="display: none;" name="registration">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Name" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="address" id="address" tabindex="1" class="form-control" placeholder="Address" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" name="mobile_number" id="mobile_number" tabindex="1" class="form-control" placeholder="Mobile number" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="regist_password" id="regist_password" tabindex="2" class="form-control" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="confirm_password" id="confirm_password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn-register" value="Register Now">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="profile-panel">
+                <div class="col-md-6 col-md-offset-3">
+
+                    <div class="card hovercard">
+                        <div class="cardheader">
+
+                        </div>
+                        <div class="avatar">
+                            <img alt="" src="static/avatar.jpg">
+                        </div>
+                        <div class="info">
+                            <div class="title">
+                                <a target="_blank" href="#" id="desc_name">[name]</a>
+                            </div>
+                            <div class="desc" id="desc_username">username</div>
+                            <div class="desc" id="desc_email">email</div>
+                            <div class="desc" id="desc_address">address</div>
+                            <div class="desc" id="desc_mobile">mobile_number</div>
+                        </div>
+                        <div class="bottom">
+                            <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" rel="publisher"
+                               href="https://plus.google.com/+ahmshahnuralam">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                            <a class="btn btn-primary btn-sm" rel="publisher"
+                               href="https://plus.google.com/shahnuralam">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
+                                <i class="fa fa-behance"></i>
+                            </a>
+                        </div>
+                        <div class="bottom">
+                            <button class="btn-register" id="logout-btn">Logout</button>
+                        </div>
+                    </div>
+
+                </div>
+            <div class="row" id="confirm_password_tmpl" style="display: none;">
+                <form id="password-confirm-form" action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="password" name="password_new" id="password_new" tabindex="2" class="form-control" placeholder="Password" minlength="5">
+                    </div>                                        
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="submit" name="confirm_password_submit" id="confirm_password_submit" tabindex="4" class="form-control btn-login" value="Reset">
+                            </div>
+                        </div>
+                    </div>                                        
+                </form>
+            </div>>
+            </div>
+            <!-- Modal -->
+              <div class="modal fade" id="infor-modal" role="dialog">
+                <div class="modal-dialog">
+                
+                  <!-- Modal content-->
+                  <div class="modal-content">      
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>      
+                      <h4 class="modal-title"></h4>
+                    </div>              
+                    <div class="modal-body alert alert-success" id="modal-body-box">
+                      <p><em>Congratulations!</em></p>
+                      <p>You've been register success with username</p>
+                      <p>Click Login below to show your profile.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+        </div>
+    </div>
+</body>
+</html>
+

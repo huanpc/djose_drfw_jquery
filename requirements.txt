@@ -1,0 +1,7 @@
+Django==1.9.8
+djangorestframework==3.4.0
+django-cors-headers==1.1.0
+djoser==0.5.4
+djangorestframework-jwt==1.10.0
+django-anymail==0.8
+
